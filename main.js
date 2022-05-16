@@ -108,6 +108,12 @@ function newPost(post) {
   </div>`;
 }
 
+//modifica delle date da americane a italiane
+//manipolazioni date
+for (let i = 0; i < posts.length; i++) {
+  posts[i].created = posts[i].created.split('-').reverse().join('/');
+}
+
 //querySelectors
 const container = document.querySelector('#container');
 
