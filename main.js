@@ -111,6 +111,18 @@ function newPost(post) {
 //querySelectors
 const container = document.querySelector('#container');
 
+//aggiunta dei post al container
 for (let i = 0; i < posts.length; i++) {
   container.innerHTML += newPost(posts[i]);
+}
+//aggiunta eventi ai like buttons
+const likedID = [];
+const likeButtons = document.querySelectorAll('.like-button');
+for (let i = 0; i < likeButtons.length; i++) {
+  likeButtons[i].addEventListener('click', function () {
+    //aggiunta classe like ai button e link all'id nel array likeID
+    likeButtons[i].classList.add('like-button--liked');
+    likedID.push(posts[i].id);
+    console.log(likedID);
+  });
 }
