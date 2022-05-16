@@ -124,8 +124,9 @@ for (let i = 0; i < posts.length; i++) {
 const likedID = [];
 const likeButtons = document.querySelectorAll('.like-button');
 for (let i = 0; i < likeButtons.length; i++) {
-  likeButtons[i].addEventListener('click', function () {
+  likeButtons[i].addEventListener('click', function (e) {
     //aggiunta classe like ai button e link all'id nel array likeID
+    e.preventDefault(); // annulal il back on top automatico della pagina al click del like
     if (!likedID.includes(posts[i].id)) {
       likeButtons[i].classList.add('like-button--liked');
       //aumneta i like nell' oggetto e nel html
