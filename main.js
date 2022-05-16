@@ -75,7 +75,7 @@ function newPost(post) {
         </div>
         <div class="post-meta__data">
           <div class="post-meta__author">${post.author.name}</div>
-          <div class="post-meta__time">4 mesi fa</div>
+          <div class="post-meta__time">${post.created}</div>
         </div>
       </div>
     </div>
