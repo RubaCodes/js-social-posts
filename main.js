@@ -128,14 +128,14 @@ for (let i = 0; i < likeButtons.length; i++) {
     //aggiunta classe like ai button e link all'id nel array likeID
     e.preventDefault(); // annulal il back on top automatico della pagina al click del like
     if (!likedID.includes(posts[i].id)) {
-      likeButtons[i].classList.add('like-button--liked');
+      this.classList.add('like-button--liked');
       //aumneta i like nell' oggetto e nel html
       document.querySelectorAll('#like-counter-1')[i].innerHTML = ++posts[i]
         .likes;
       //aggiunto alla lista dei post 'likati
       likedID.push(posts[i].id);
     } else {
-      likeButtons[i].classList.remove('like-button--liked');
+      this.classList.remove('like-button--liked');
       document.querySelectorAll('#like-counter-1')[i].innerHTML = --posts[i]
         .likes;
       likedID.pop(posts[i].id);
