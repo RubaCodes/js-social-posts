@@ -70,7 +70,7 @@ function newPost(post) {
           <img
             class="profile-pic"
             src=${post.author.image}
-            alt=${post.author.name}
+            alt=${post.author.alt}
           />
         </div>
         <div class="post-meta__data">
@@ -108,8 +108,6 @@ function newPost(post) {
   </div>`;
 }
 
-//modifica delle date da americane a italiane
-
 //querySelectors
 const container = document.querySelector('#container');
 
@@ -118,11 +116,22 @@ for (let i = 0; i < posts.length; i++) {
   //manipolazioni date
   posts[i].created = posts[i].created.split('-').reverse().join('/');
   //aggiunt post alla pagina
+  //gestore dell'alt per la profile pic
+  if (posts[i].author.image == null) {
+    posts[i].author.alt =
+      posts[i].author.name.split(' ')[0][0] +
+      posts[i].author.name.split(' ')[1][0];
+  } else {
+    posts[i].author.alt = posts[i].author.name;
+  }
   container.innerHTML += newPost(posts[i]);
 }
+
 //aggiunta eventi ai like buttons
 const likedID = [];
+//hook ai selector necessari
 const likeButtons = document.querySelectorAll('.like-button');
+const likeCounter = document.querySelectorAll('#like-counter-1');
 for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener('click', function (e) {
     //aggiunta classe like ai button e link all'id nel array likeID
@@ -130,15 +139,17 @@ for (let i = 0; i < likeButtons.length; i++) {
     if (!likedID.includes(posts[i].id)) {
       this.classList.add('like-button--liked');
       //aumneta i like nell' oggetto e nel html
-      document.querySelectorAll('#like-counter-1')[i].innerHTML = ++posts[i]
-        .likes;
+      likeCounter[i].innerHTML = ++posts[i].likes;
       //aggiunto alla lista dei post 'likati
       likedID.push(posts[i].id);
     } else {
       this.classList.remove('like-button--liked');
-      document.querySelectorAll('#like-counter-1')[i].innerHTML = --posts[i]
-        .likes;
+      likeCounter[i].innerHTML = --posts[i].likes;
       likedID.pop(posts[i].id);
     }
   });
 }
+
+//stringa per le iniziali sull'alt
+//    posts[i].author.name.split(' ')[0][0] +
+//    posts[i].author.name.split(' ')[1][0];
