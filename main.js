@@ -109,16 +109,15 @@ function newPost(post) {
 }
 
 //modifica delle date da americane a italiane
-//manipolazioni date
-for (let i = 0; i < posts.length; i++) {
-  posts[i].created = posts[i].created.split('-').reverse().join('/');
-}
 
 //querySelectors
 const container = document.querySelector('#container');
 
 //aggiunta dei post al container
 for (let i = 0; i < posts.length; i++) {
+  //manipolazioni date
+  posts[i].created = posts[i].created.split('-').reverse().join('/');
+  //aggiunt post alla pagina
   container.innerHTML += newPost(posts[i]);
 }
 //aggiunta eventi ai like buttons
@@ -128,6 +127,10 @@ for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener('click', function () {
     //aggiunta classe like ai button e link all'id nel array likeID
     likeButtons[i].classList.add('like-button--liked');
+    //aumneta i like nell' oggetto e nel html
+    posts[i].likes++;
+    document.querySelectorAll('#like-counter-1')[i].innerHTML = posts[i].likes;
+    //aggiunto alla lista dei post 'likati
     likedID.push(posts[i].id);
     console.log(likedID);
   });
