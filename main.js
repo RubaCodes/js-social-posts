@@ -62,6 +62,7 @@ const posts = [
 ];
 
 //funzioni
+//ritoran il markup html da postare in ogni post
 function newPost(post) {
   return `<div class="post">
     <div class="post__header">
@@ -134,22 +135,19 @@ const likeButtons = document.querySelectorAll('.like-button');
 const likeCounter = document.querySelectorAll('#like-counter-1');
 for (let i = 0; i < likeButtons.length; i++) {
   likeButtons[i].addEventListener('click', function (e) {
-    //aggiunta classe like ai button e link all'id nel array likeID
-    e.preventDefault(); // annulal il back on top automatico della pagina al click del like
+    e.preventDefault(); // annulla il back on top automatico della pagina al click del like
     if (!likedID.includes(posts[i].id)) {
       this.classList.add('like-button--liked');
-      //aumneta i like nell' oggetto e nel html
+      //aumenta i like nell' oggetto e nel html
       likeCounter[i].innerHTML = ++posts[i].likes;
-      //aggiunto alla lista dei post 'likati
+      //aggiunto alla lista dei post 'likati'
       likedID.push(posts[i].id);
     } else {
       this.classList.remove('like-button--liked');
+      //diminutisce i like nell' oggetto e nel html
       likeCounter[i].innerHTML = --posts[i].likes;
+      //rimosso dalla lista dei post 'likati'
       likedID.pop(posts[i].id);
     }
   });
 }
-
-//stringa per le iniziali sull'alt
-//    posts[i].author.name.split(' ')[0][0] +
-//    posts[i].author.name.split(' ')[1][0];
